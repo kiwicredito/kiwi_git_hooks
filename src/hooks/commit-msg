@@ -1,0 +1,43 @@
+#!/bin/bash
+
+# Get the commit message (first argument)
+commit_msg_file="$1"
+commit_msg=$(cat "$commit_msg_file")
+
+# Skip validation for merge commits
+if [[ "$commit_msg" =~ ^Merge ]]; then
+    exit 0
+fi
+
+# Regex for conventional commits
+# format: type: description
+conventional_regex="^(feat|fix|update|build|docs|breaking|upgrade|chore): .+"
+
+if ! [[ "$commit_msg" =~ $conventional_regex ]]; then
+    echo -e "  ...but PLEASE DON'T BE LAZY WITH THE COMMIT MESSAGES 🤦‍♂️"
+    echo ""
+    echo -e "\033[1;31m❌ ERROR: Commit message format is incorrect!\033[0m"
+    echo -e "\033[1;36m✨ Required format: type: description\033[0m"
+    echo -e "\033[1;34m📝 Valid types:\033[0m"
+    echo -e "  • \033[1;32mfeat\033[0m     → New features"
+    echo -e "  • \033[1;31mfix\033[0m      → Bug fixes"
+    echo -e "  • \033[1;33mupdate\033[0m   → Updates to existing features"
+    echo -e "  • \033[1;36mbuild\033[0m    → Build system changes"
+    echo -e "  • \033[1;35mdocs\033[0m     → Documentation only changes"
+    echo -e "  • \033[1;31mbreaking\033[0m → Breaking changes"
+    echo -e "  • \033[1;32mupgrade\033[0m  → Dependency upgrades"
+    echo -e "  • \033[1;33mchore\033[0m    → Maintenance tasks"
+    echo ""
+    echo -e "\033[1;32m✅ Good examples:\033[0m"
+    echo -e "  • feat: add user authentication system"
+    echo -e "  • fix: resolve login page crash"
+    echo -e "  • docs: update API documentation"
+    echo -e "  • update: improve error handling"
+    exit 1
+fi
+
+# Check message length
+if [ ${#commit_msg} -gt 72 ]; then
+    echo "ERROR: Commit message is too long (max 72 characters)"
+    exit 1
+fi 

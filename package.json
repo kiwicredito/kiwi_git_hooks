@@ -1,0 +1,22 @@
+{
+	"name": "kiwi_git_hooks",
+	"version": "1.0.0",
+	"description": "Reusable git hooks library",
+	"bin": {
+		"install-git-hooks": "./bin/install-hooks.js"
+	},
+	"scripts": {
+		"postinstall": "node ./bin/install-hooks.js"
+	},
+	"files": [
+		"bin/",
+		"src/hooks/"
+	],
+	"keywords": [
+		"git",
+		"hooks",
+		"git-hooks"
+	],
+	"author": "Luisa ALzate",
+	"license": "MIT"
+}

@@ -1,0 +1,49 @@
+#!/bin/bash
+
+# Print Kiwi Logo
+echo -e "\033[38;2;51;202;255m"
+echo "  ██╗  ██╗██╗██╗    ██╗██╗"
+echo "  ██║ ██╔╝██║██║    ██║██║"
+echo "  █████╔╝ ██║██║ █╗ ██║██║"
+echo "  ██╔═██╗ ██║██║███╗██║██║"
+echo "  ██║  ██╗██║╚███╔███╔╝██║"
+echo "  ╚═╝  ╚═╝╚═╝ ╚══╝╚══╝ ╚═╝"
+echo "  Nice work 💪 Keep coding like this!"
+echo -e "\033[0m"
+echo ""
+
+# Get current branch name
+BRANCH_NAME=$(git symbolic-ref --short HEAD)
+
+# Branch name validation pattern
+BRANCH_PATTERN="^(feature|fix|chore|update|docs|build)/SET-[0-9]+-[a-z0-9-]+$"
+
+# Validate branch name
+if ! echo "$BRANCH_NAME" | grep -E "$BRANCH_PATTERN" > /dev/null; then
+    echo -e "  ...but PLEASE DON'T BE LAZY WITH THE BRANCH NAMES 🤦‍♂️"
+    echo ""
+    echo -e "\033[1;31m❌ Invalid branch name:\033[0m '\033[1;33m$BRANCH_NAME\033[0m'"
+    echo ""
+    echo -e "\033[1;34m🔍 Branch names must follow this pattern:\033[0m"
+    echo -e "    \033[1;36m<type>/SET-<number>-<description>\033[0m"
+    echo ""
+    echo -e "\033[1;32m✅ Valid types are:\033[0m"
+    echo -e "    • \033[1;32mfeature\033[0m  → for new features"
+    echo -e "    • \033[1;31mfix\033[0m      → for bug fixes"
+    echo -e "    • \033[1;33mchore\033[0m    → for maintenance tasks"
+    echo -e "    • \033[1;36mupdate\033[0m   → for updates and improvements"
+    echo -e "    • \033[1;35mdocs\033[0m     → for documentation changes"
+    echo -e "    • \033[1;34mbuild\033[0m    → for build system changes"
+    echo ""
+    echo -e "\033[1;34m📝 Examples of valid branch names:\033[0m"
+    echo -e "    • \033[0;32mfeature/SET-123-add-user-authentication\033[0m"
+    echo -e "    • \033[0;31mfix/SET-456-fix-login-error\033[0m"
+    echo -e "    • \033[0;36mupdate/SET-789-improve-performance\033[0m"
+    echo ""
+    echo -e "\033[1;31m❗ Please rename your branch using:\033[0m"
+    echo -e "    \033[1;36mgit branch -m <new-name>\033[0m"
+    echo ""
+    exit 1
+fi
+
+exit 0
