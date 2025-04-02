@@ -14,30 +14,41 @@ fi
 conventional_regex="^(feat|fix|update|build|docs|breaking|upgrade|chore): .+"
 
 if ! [[ "$commit_msg" =~ $conventional_regex ]]; then
-    echo -e "  ...but PLEASE DON'T BE LAZY WITH THE COMMIT MESSAGES 🤦‍♂️"
     echo ""
-    echo -e "\033[1;31m❌ ERROR: Commit message format is incorrect!\033[0m"
-    echo -e "\033[1;36m✨ Required format: type: description\033[0m"
-    echo -e "\033[1;34m📝 Valid types:\033[0m"
-    echo -e "  • \033[1;32mfeat\033[0m     → New features"
-    echo -e "  • \033[1;31mfix\033[0m      → Bug fixes"
-    echo -e "  • \033[1;33mupdate\033[0m   → Updates to existing features"
-    echo -e "  • \033[1;36mbuild\033[0m    → Build system changes"
-    echo -e "  • \033[1;35mdocs\033[0m     → Documentation only changes"
-    echo -e "  • \033[1;31mbreaking\033[0m → Breaking changes"
-    echo -e "  • \033[1;32mupgrade\033[0m  → Dependency upgrades"
-    echo -e "  • \033[1;33mchore\033[0m    → Maintenance tasks"
+    echo "-----------------------------------------"
+    echo "ERROR: Commit message format is incorrect!"
+    echo "-----------------------------------------"
     echo ""
-    echo -e "\033[1;32m✅ Good examples:\033[0m"
-    echo -e "  • feat: add user authentication system"
-    echo -e "  • fix: resolve login page crash"
-    echo -e "  • docs: update API documentation"
-    echo -e "  • update: improve error handling"
+    echo "Please follow the conventional commit format:"
+    echo ""
+    echo "Required format: type: description"
+    echo ""
+    echo "Valid types:"
+    echo "  • feat     → New features"
+    echo "  • fix      → Bug fixes"
+    echo "  • update   → Updates to existing features"
+    echo "  • build    → Build system changes"
+    echo "  • docs     → Documentation only changes"
+    echo "  • breaking → Breaking changes"
+    echo "  • upgrade  → Dependency upgrades"
+    echo "  • chore    → Maintenance tasks"
+    echo ""
+    echo "Good examples:"
+    echo "  • feat: add user authentication system"
+    echo "  • fix: resolve login page crash"
+    echo "  • docs: update API documentation"
+    echo "  • update: improve error handling"
+    echo ""
     exit 1
 fi
 
 # Check message length
-if [ ${#commit_msg} -gt 72 ]; then
-    echo "ERROR: Commit message is too long (max 72 characters)"
+if [ ${#commit_msg} -gt 280 ]; then
+    echo ""
+    echo "-----------------------------------------"
+    echo "ERROR: Commit message is too long!"
+    echo "-----------------------------------------"
+    echo ""
+    echo "Commit messages should be no longer than 280 characters."
     exit 1
-fi 
+fi
