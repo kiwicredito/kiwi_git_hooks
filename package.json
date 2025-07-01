@@ -2,10 +2,6 @@
 	"name": "kiwi_git_hooks",
 	"version": "1.0.0",
 	"description": "Reusable git hooks library",
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/kiwicredito/kiwi_git_hooks.git"
-	},
 	"bin": {
 		"install-git-hooks": "./bin/install-hooks.js"
 	},
